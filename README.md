@@ -5,3 +5,20 @@
 2- Specified "command" and "args" fields, for each container, override "ENTRYPOINT" and "CMD" of its image, respectively. When "command" is provided, Dockerfile "ENTRYPOINT" and "CMD" are both ignored. When "args" is only set, "CMD" in Dockerfile is replaced with "args". The first argument of "command" (or "ENTRYPOINT") must be an executable (We may need to update PATH env. variable to be able to run the executable). All arguments in "args" (or "CMD") will be appended to "command" (or "ENTRYPOINT"). Since providing long options is possible in both "--key=value" and "--key value" formats ([reference](https://unix.stackexchange.com/questions/573377/do-command-line-options-take-an-equals-sign-between-option-name-and-value), args/CMD can be written in both ways: '["--key=value"]' and '["--key". "value"]'
 
 3- Configmap stores non-confidential data in key-value pairs. Configmap can be injected into Pods as **environment variables**, command-line arguments, or as configuration files in a **volume**.
+
+Helpful 'kubectl' commands:
+kubectl explain <resource-type>: to find out about api version for a resource type. 
+
+To do:
+kubectl replace
+
+env
+  - name:
+    valueFrom:
+      configMapKeyRef:
+        name:
+        key:
+
+envFrom
+  - configMapRef
+    name:
