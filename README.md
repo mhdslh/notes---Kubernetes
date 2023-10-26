@@ -11,6 +11,10 @@ ConfigMap accepts both single line property values and multi-line file-like valu
 
 5- ServiceAccounts are used to authenticate to Kubernetes API server. Before v1.22, for every ServiceAccount a long-lived static token was created using Secrets. Then by setting "spec.serviceAccountName" inside Pod, Kubernetes mounted that specific ServiceAccount's token, instead of default ServiceAccount's token, as a volume inside the Pod. From v1.22, kubernetes gets short-lived automatically rotating (instead of long-lived static) tokens using the TokenRequest API (instead of Secret) and mounts it in Pod as a projected volume. These tokens are time and audiance bounded (their lifetime depends on the Pod rather than the ServiceAccount). From v1.24, Kubernetes no longer generates tokens automatically. Administrators are responsible for that, for instance by running "kubectl create token <service-account-name>". To prevent kubernetes from automatically injecting credentials (for a specified ServiceAccount or the default ServiceAccount) in the Pod, we must set "spec.automountServiceAccountToken" to false. Note that we can still get long-lived static tokens (similar to what we had before v1.22) using Secrets of type "kubernetes.io/service-account-token". Finally, by default, ServiceAccounts are granted default permissions. We must use RBAC to grant required permissions.
 
+6- ResourceQuota and LimitRanges 
+
+7- Taints and Tolerations
+
 ---
 Helpful 'kubectl' commands:
 kubectl explain <resource-type>: to find out about api version for a resource type. 
