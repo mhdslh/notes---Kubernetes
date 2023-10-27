@@ -11,9 +11,15 @@ ConfigMap accepts both single line property values and multi-line file-like valu
 
 5- ServiceAccounts are used to authenticate to Kubernetes API server. Before v1.22, for every ServiceAccount a long-lived static token was created using Secrets. Then by setting "spec.serviceAccountName" inside Pod, Kubernetes mounted that specific ServiceAccount's token, instead of default ServiceAccount's token, as a volume inside the Pod. From v1.22, kubernetes gets short-lived automatically rotating (instead of long-lived static) tokens using the TokenRequest API (instead of Secret) and mounts it in Pod as a projected volume. These tokens are time and audiance bounded (their lifetime depends on the Pod rather than the ServiceAccount). From v1.24, Kubernetes no longer generates tokens automatically. Administrators are responsible for that, for instance by running "kubectl create token <service-account-name>". To prevent kubernetes from automatically injecting credentials (for a specified ServiceAccount or the default ServiceAccount) in the Pod, we must set "spec.automountServiceAccountToken" to false. Note that we can still get long-lived static tokens (similar to what we had before v1.22) using Secrets of type "kubernetes.io/service-account-token". Finally, by default, ServiceAccounts are granted default permissions. We must use RBAC to grant required permissions.
 
-6- ResourceQuotas limit aggregate resource consumption (limits.cpu, limits.memory, requests.cpu, requests.memory) per namespace. LimitRange is a policy to constrain the resource allocations (limits and requests) specified for each applicable object kind (such as Pod or PersistentVolumeClaim) in a namespace. For instance, if resource requests and limits are specified for a Pod they must be in the range [min, max] defined in LimitRange, and if not specified they will use default values defined in LimitRange. 
+6, 7, 8, and 9 describe **Pod** scheduling onto nodes:
 
-7- Taints allow nodes to repel Pods. A Pod can be scheduled on a node only if it tolerates the taint, i.e., Tolerations applied to the Pod match the taints. Note that Tolerations allow scheduling but don't guarantee scheduling. In otherwise, tolerating a node's taints is the necessary condition to be able to schedule Pods on that node.  
+  6- ResourceQuotas limit aggregate resource consumption (limits.cpu, limits.memory, requests.cpu, requests.memory) per namespace. LimitRange is a policy to constrain the resource allocations (limits and requests) specified for each applicable object kind (such as Pod or PersistentVolumeClaim) in a namespace. For instance, if resource requests and limits are specified for a Pod they must be in the range [min, max] defined in LimitRange, and if not specified they will use default values defined in LimitRange. 
+
+  7- Taints allow nodes to repel Pods. A Pod can be scheduled on a node only if it tolerates the taint, i.e., Tolerations applied to the Pod match the taints. Note that Tolerations allow scheduling but don't guarantee scheduling. In otherwise, tolerating a node's taints is the necessary condition to be able to schedule Pods on that node.
+
+  8- With adding nodeSelector field in the Pod's definition and specifying node labels, a pod will **only** be scheduled onto the nodes that have all of the specified labels.
+
+  9- Node affinity is conceptually similar to nodeSelector, allowing you to constrain which nodes your Pod can be scheduled on based on node labels. Compared to nodeSelector, affinity/anti-affinity is more expressive and provides more control over the selection logic. It also allows soft (preferred) rules. Similar to node taints, anti-affinity repel Pods from specific nodes.
 
 ---
 Helpful 'kubectl' commands:
@@ -26,4 +32,4 @@ https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/
 
 After creating a container with kind, inside the container we have containerd client command line tool (ctl) and docker client is not provided. What is containerd?
 
-uid, gid, group, and capabilities
+capabilities
