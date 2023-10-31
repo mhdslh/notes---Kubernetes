@@ -31,5 +31,4 @@ kubectl replace + kubectl replace -f -
 https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/
 
 After creating a container with kind, inside the container we have containerd client command line tool (ctl) and docker client is not provided. What is containerd?
-
-capabilities
+core dump
