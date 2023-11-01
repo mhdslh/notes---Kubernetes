@@ -13,13 +13,15 @@ ConfigMap accepts both single line property values and multi-line file-like valu
 
 6, 7, 8, and 9 describe **Pod** scheduling onto nodes:
 
-  6- ResourceQuotas limit aggregate resource consumption (limits.cpu, limits.memory, requests.cpu, requests.memory) per namespace. LimitRange is a policy to constrain the resource allocations (limits and requests) specified for each applicable object kind (such as Pod or PersistentVolumeClaim) in a namespace. For instance, if resource requests and limits are specified for a Pod they must be in the range [min, max] defined in LimitRange, and if not specified they will use default values defined in LimitRange. 
+    6- ResourceQuotas limit aggregate resource consumption (limits.cpu, limits.memory, requests.cpu, requests.memory) per namespace. LimitRange is a policy to constrain the resource allocations (limits and requests) specified for each applicable object kind (such as Pod or PersistentVolumeClaim) in a namespace. For instance, if resource requests and limits are specified for a Pod they must be in the range [min, max] defined in LimitRange, and if not specified they will use default values defined in LimitRange. 
 
-  7- Taints allow nodes to repel Pods. A Pod can be scheduled on a node only if it tolerates the taint, i.e., Tolerations applied to the Pod match the taints. Note that Tolerations allow scheduling but don't guarantee scheduling. In otherwise, tolerating a node's taints is the necessary condition to be able to schedule Pods on that node.
+    7- Taints allow nodes to repel Pods. A Pod can be scheduled on a node only if it tolerates the taint, i.e., Tolerations applied to the Pod match the taints. Note that Tolerations allow scheduling but don't guarantee scheduling. In otherwise, tolerating a node's taints is the necessary condition to be able to schedule Pods on that node.
 
-  8- With adding nodeSelector field in the Pod's definition and specifying node labels, a pod will **only** be scheduled onto the nodes that have all of the specified labels.
+    8- With adding nodeSelector field in the Pod's definition and specifying node labels, a pod will **only** be scheduled onto the nodes that have all of the specified labels.
 
-  9- Node affinity is conceptually similar to nodeSelector, allowing you to constrain which nodes your Pod can be scheduled on based on node labels. Compared to nodeSelector, affinity/anti-affinity is more expressive and provides more control over the selection logic. It also allows soft (preferred) rules. Similar to node taints, anti-affinity repel Pods from specific nodes.
+    9- Node affinity is conceptually similar to nodeSelector, allowing you to constrain which nodes your Pod can be scheduled on based on node labels. Compared to nodeSelector, affinity/anti-affinity is more expressive and provides more control over the selection logic. It also allows soft (preferred) rules. Similar to node taints, anti-affinity repel Pods from specific nodes.
+
+10- In the absence of readinessProbe, a Pod is considered ready when all of its containers are created (**reference?**). With introducing a readinessProbe under .spec.containers[] for a container, application itself can decide on its readiness. An unready Pod does not receive traffic through Kubernetes Services. Liveness probes can be used to detect when to restart a container. For example, liveness probes can catch a deadlock, where an application is running and ready (receives traffic), but unable to make progress. Note that usually there is no need to consider application crash by liveness probe because upon main application (PID 1) crash the Pod is subjected to its restart policy (set by .spec.restartPolicy field).
 
 ---
 Helpful 'kubectl' commands:
@@ -27,8 +29,6 @@ kubectl explain <resource-type>: to find out about api version for a resource ty
 
 ---
 To do:
-kubectl replace + kubectl replace -f -
 https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/
-
 After creating a container with kind, inside the container we have containerd client command line tool (ctl) and docker client is not provided. What is containerd?
 core dump
