@@ -21,11 +21,15 @@ ConfigMap accepts both single line property values and multi-line file-like valu
 
     9- Node affinity is conceptually similar to nodeSelector, allowing you to constrain which nodes your Pod can be scheduled on based on node labels. Compared to nodeSelector, affinity/anti-affinity is more expressive and provides more control over the selection logic. It also allows soft (preferred) rules. Similar to node taints, anti-affinity repel Pods from specific nodes.
 
-10- In the absence of readinessProbe, a Pod is considered ready when all of its containers are created (**reference?**). With introducing a readinessProbe under .spec.containers[] for a container, application itself can decide on its readiness. An unready Pod does not receive traffic through Kubernetes Services. Liveness probes can be used to detect when to restart a container. For example, liveness probes can catch a deadlock, where an application is running and ready (receives traffic), but unable to make progress. Note that usually there is no need to consider application crash by liveness probe because upon main application (PID 1) crash the Pod is subjected to its restart policy (set by .spec.restartPolicy field).
+10- In the absence of readinessProbe, a Pod is considered ready when all of its containers are created (**reference?**). With introducing a readinessProbe under .spec.containers[] for a container, application itself can decide on its readiness. An unready Pod does not receive traffic through Kubernetes Services. 
+Liveness probes can be used to detect when to restart a container. For example, liveness probes can catch a deadlock, where an application is running and ready (receives traffic), but unable to make progress. Note that usually there is no need to consider application crash for liveness probe because upon main application (PID 1) crash the Pod is subjected to its restart policy (set by .spec.restartPolicy field).
+
+11- Labels are key/value pairs that are attached to objects. Labels do not provide uniqueness. In general, we expect many objects to carry the same label(s). Via a label selector, the client/user can identify a set of objects. One usage scenario for label requirement is for Pods to specify node selection criteria (check Point 9). The API currently supports two types of selectors: equality-based and set-based ([more information](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)). In kubectl commands, --selector option (or -l in short) allows filtering by label keys and values. --field-selector option also allows selecting Kubernetes objects based on the value of one or more resource fields. For example, metadata.namespace!=default or status.phase=Pending. It is worth mentionnig that, unlike --selector option, set-based selectors are not supported for --field-selector option.
 
 ---
 Helpful 'kubectl' commands:
-kubectl explain <resource-type>: to find out about api version for a resource type. 
+kubectl explain <resource-type>: to find out about api version for a resource type.
+kubectl top <node or pod>: to see the resource consumption for nodes or pods.
 
 ---
 To do:
