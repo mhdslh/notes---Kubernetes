@@ -28,6 +28,8 @@ Liveness probes can be used to detect when to restart a container. For example, 
 
 12- A Deployment revision is created when a Deployment rollout is triggered, i.e., if and only if Deployment's Pod template (.spec.template) is changed. Other updates such as scaling the Deployment do not create a revision. Rolling update is the default rollout strategy where Pods are updated incrementally (there is a limit on maximum number of new Pods and unavailable Pods during update).  Updates can be reverted. Deployment's revision history is stored in the ReplicaSet it controls. Once an old ReplicaSet is deleted, we lose the ability to rollback to that revision of Deployment. By default, 10 old ReplicaSets will be kept (to change this value set .spec.revisionHistoryLimit).'
 
+13- recreate, rolling update, blue green, canary
+
 ---
 Helpful 'kubectl' commands:
 kubectl explain <resource-type>: to find out about api version for a resource type.
