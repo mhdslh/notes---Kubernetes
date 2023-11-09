@@ -30,7 +30,7 @@ Liveness probes can be used to detect when to restart a container. For example, 
 
 13- There is two Kubernetes-native strategies for updating Deployments, namely Recreate and RollingUpdate (default value). The updating strategy can be specified by setting .spec.strategy field. As explained earlier, in RollingUpdate, Pods are updated incrementally, while, for Recreate, all existing Pods are killed before new ones are created. With RollingUpdate, we can set maxUnavailable (absolute number/percentage of desired Pods unavailable at all times during update) and maxSurge (absolute number/percentage of Pods that can be created over the desired number of Pods) to control the process. As a Kubernetes developer, we can employ two other updating strategies, namely [Blue/Green](https://docs.aws.amazon.com/whitepapers/latest/overview-deployment-options/bluegreen-deployments.html) and [Canary](https://docs.aws.amazon.com/whitepapers/latest/introduction-devops-aws/canary-deployments.html). They both can be implemented through labels and services
 
-14- Job/CroneJob and restartPolicy
+14- A Job creates one or more Pods (.spec.parallelism) and will continue to retry execution of the Pods until a specified number of them (.spec.completions) successfully terminate. When a specified number of successful completions is reached, the task (ie, Job) is complete. To run a Job (either a single task, or several in parallel) on a schedule use CronJob. For Jobs and CronJobs, only a RestartPolicy equal to Never or OnFailure is allowed in the Pod's spec (Unlike ReplicaSets and Deployments where RestartPolicy is Always).
 
 ---
 Helpful 'kubectl' commands:
