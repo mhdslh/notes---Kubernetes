@@ -32,7 +32,7 @@ Liveness probes can be used to detect when to restart a container. For example, 
 
 14- A Job creates one or more Pods (.spec.parallelism) and will continue to retry execution of the Pods until a specified number of them (.spec.completions) successfully terminate. When a specified number of successful completions is reached, the task (ie, Job) is complete. To run a Job (either a single task, or several in parallel) on a schedule use CronJob. For Jobs and CronJobs, only a RestartPolicy equal to Never or OnFailure is allowed in the Pod's spec (Unlike ReplicaSets and Deployments where RestartPolicy is Always). To specify the number of retries before considering a Job as failed set .spec.backoffLimit (default value is 6). Failed Pods associated with the Job are recreated by the Job controller with an exponential back-off delay.
 
-15- Service for multiple nodes.
+15- A NodePort can span accross multiple nodes, i.e., it can send traffic to backing Pods even when they are on different nodes.
 
 ---
 Helpful 'kubectl' commands:
