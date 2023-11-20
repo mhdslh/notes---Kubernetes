@@ -34,6 +34,10 @@ Liveness probes can be used to detect when to restart a container. For example, 
 
 15- A NodePort can span accross multiple nodes, i.e., it can send traffic to backing Pods even when they are on different nodes.
 
+
+16- 
+![image](https://github.com/mhdslh/notes---Kubernetes/assets/61638154/c35b6761-61bd-4334-a324-42ddf33cbcd9)
+
 ---
 Helpful 'kubectl' commands:
 - kubectl explain <resource-type>: to find out about api version for a resource type.
