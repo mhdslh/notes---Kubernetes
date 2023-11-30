@@ -42,6 +42,8 @@ Liveness probes can be used to detect when to restart a container. For example, 
 
 18- Ingress controller and Network Plugin must be configured for minikube and kind cluster to be able to use ingress resources and network policies.
 
+multiple nodes in kind (containers in the background) and volumes on the same path in each node
+
 ---
 Helpful 'kubectl' commands:
 - kubectl explain <resource-type>: to find out about api version for a resource type.
