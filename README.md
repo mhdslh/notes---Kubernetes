@@ -34,13 +34,14 @@ Liveness probes can be used to detect when to restart a container. For example, 
 
 15- A NodePort can span across multiple nodes, i.e., it can send traffic to backing Pods even when they are on different nodes.
 
-
 16- 
 ![image](https://github.com/mhdslh/notes---Kubernetes/assets/61638154/c35b6761-61bd-4334-a324-42ddf33cbcd9)
 
 17- Remember namespaces provide a mechanism for isolating groups of resources within a single cluster. For instance, a service directs traffic to the Pods that match its selector within the same namespace. Pods in namespace 'my-ns' can call the service 'my-svc' in that namespace by using its name,i.e., 'my-svc'. However, Pods in other namespaces must call this service 'my-svc.my-ns'. This is how DNS records can be used to contact services.
 
 18- Ingress controller and Network Plugin must be configured for minikube and kind cluster to be able to use ingress resources and network policies.
+
+19- In a deployment with multiple containers, if a container crashes the Pod will not restart, only the crashed container will.
 
 multiple nodes in kind (containers in the background) and volumes on the same path in each node
 
