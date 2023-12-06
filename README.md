@@ -41,9 +41,23 @@ Liveness probes can be used to detect when to restart a container. For example, 
 
 18- Ingress controller and Network Plugin must be configured for minikube and kind cluster to be able to use ingress resources and network policies.
 
-19- In a deployment with multiple containers, if a container crashes the Pod will not restart, only the crashed container will.
+19- In a deployment with multiple containers, if a container crashes, Kubelete restarts the crashed container, not the entire Pod.
 
-multiple nodes in kind (containers in the background) and volumes on the same path in each node
+20- **volumes** are used 1) to have durable data beyond a container's lifespan, i.e., exist after a container restart 2) share files between containers. Ephemeral volume types have a lifetime of a Pod, while Persistent volume types exist beyond the lifetime of a Pod. To use a volume, 1) specify the provided volumes to the Pod in ".spec.volumes" 2) mount into containers by setting ".spec.containers[*].volumeMounts". Kubernetes supports several types of volumes. In the following, we describe some of them:
+  - configMap: to inject configuration data - always mounted as read only
+  - secret: to pass sensitive information to Pods - always mounted as read only
+  - emptyDir: initially empty - all containers in the Pod can read and write the same files in the emptyDir volume, even though it can be mounted at different paths for each container
+  - hostPath: mounts a file or directory from the host node's filesystem into a Pod
+  - projected: build directories that contain several existing volume sources (secrets, configMaps, and downwardAPIs)
+  - persistentVolumeClaim: to mount a persisten volume into a Pod - to mount a PV that is bounded to a PVC, ".spec.volumes.persistentVolumeClaim.claimName" is set to PVC's name. (PV and PVC are described in more details below)
+Remark: When using kind or minikube, the Kubernetes cluster is deployed as a container on the host machine. hostPath mounts a file or directory from the cluster container's filesystem, not the host machine, into the Pod. To mount a file or directory from the host machine, we first need to use docker volumes to mount a local file or directory into the cluster container (host node <---> kubernetes cluster running as a container <---> containers within the cluster).
+
+PersistentVolume (PV) captures the details of the implementation of the storage and PersistentVolumeClaim (PVC) is a request for storage; thus, details of how storage is implemented is abstracted from how it is consumed. Interaction between PV and PVC follows this lifecycle:
+  - provisioning: PVs are created either statically by a cluster administrator or dynamically by storage class upon getting a request (PVC).
+  - binding: PV to PVC binding is a one-to-one mapping, using a ClaimRef (claimRef field) which is a bi-directional binding between the PersistentVolume and the PersistentVolumeClaim.
+  - using: Pods use claims as volumes (described earlier). **Claims must exist in the same namespace as the Pod using the claim.**
+
+21- coredump
 
 ---
 Helpful 'kubectl' commands:
