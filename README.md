@@ -53,11 +53,20 @@ Liveness probes can be used to detect when to restart a container. For example, 
 Remark: When using kind or minikube, the Kubernetes cluster is deployed as a container on the host machine. hostPath mounts a file or directory from the cluster container's filesystem, not the host machine, into the Pod. To mount a file or directory from the host machine, we first need to use docker volumes to mount a local file or directory into the cluster container (host node <---> kubernetes cluster running as a container <---> containers within the cluster).
 
 PersistentVolume (PV) captures the details of the implementation of the storage and PersistentVolumeClaim (PVC) is a request for storage; thus, details of how storage is implemented is abstracted from how it is consumed. Interaction between PV and PVC follows this lifecycle:
-  - provisioning: PVs are created either statically by a cluster administrator or dynamically by storage class upon getting a request (PVC).
+  - provisioning: PVs are created either statically by a cluster administrator (in this case the storage asset must be created first) or dynamically by storage class upon getting a request (PVC).
   - binding: PV to PVC binding is a one-to-one mapping, using a ClaimRef (claimRef field) which is a bi-directional binding between the PersistentVolume and the PersistentVolumeClaim.
   - using: Pods use claims as volumes (described earlier). **Claims must exist in the same namespace as the Pod using the claim.**
+![image](https://github.com/mhdslh/notes---Kubernetes/assets/61638154/e9bb7dfd-12c9-4663-879b-5fc8692e4ba8)
 
-21- coredump
+
+
+21- Stateful set, DNS
+
+in clusterIP service dnslookup for <service-name> yields IP address of the clusterIP
+with headless service dnslookup for <service-name> yields IP addresses of backing Pods
+adding hostname and subdomain (must be set to the service name) in Pod definition also creates separate dns record for each pod, regardless of using a headless service or not
+
+21- coredump, coredns
 
 ---
 Helpful 'kubectl' commands:
