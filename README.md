@@ -37,7 +37,7 @@ Liveness probes can be used to detect when to restart a container. For example, 
 16- 
 ![image](https://github.com/mhdslh/notes---Kubernetes/assets/61638154/c35b6761-61bd-4334-a324-42ddf33cbcd9)
 
-17- Remember namespaces provide a mechanism for isolating groups of resources within a single cluster. For instance, a service directs traffic to the Pods that match its selector within the same namespace. Pods in namespace 'my-ns' can call the service 'my-svc' in that namespace by using its name,i.e., 'my-svc'. However, Pods in other namespaces must call this service 'my-svc.my-ns'. This is how DNS records can be used to contact services.
+17- Remember namespaces provide a mechanism for isolating groups of resources within a single cluster. For instance, a service directs traffic to the Pods that match its selector within the same namespace. Pods in namespace 'my-ns' can call the service 'my-svc' in that namespace by using its name,i.e., 'my-svc'. However, Pods in other namespaces must call this service 'my-svc.my-ns'. This is how DNS records can be used to contact services ([reference](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/ for more information).
 
 18- Ingress controller and Network Plugin must be configured for minikube and kind cluster to be able to use ingress resources and network policies.
 
@@ -58,15 +58,10 @@ PersistentVolume (PV) captures the details of the implementation of the storage 
   - using: Pods use claims as volumes (described earlier). **Claims must exist in the same namespace as the Pod using the claim.**
 ![image](https://github.com/mhdslh/notes---Kubernetes/assets/61638154/e9bb7dfd-12c9-4663-879b-5fc8692e4ba8)
 
+21- Stateful set
 
-
-21- Stateful set, DNS
-
-in clusterIP service dnslookup for <service-name> yields IP address of the clusterIP
-with headless service dnslookup for <service-name> yields IP addresses of backing Pods
-adding hostname and subdomain (must be set to the service name) in Pod definition also creates separate dns record for each pod, regardless of using a headless service or not
-
-21- coredump, coredns
+22- For a clusterIP service, dnslookup for <service-name> returns IP address of the clusterIP. On the other hand, for a headless service,  dnslookup for <service-name> returns IP addresses of the backing Pods. 
+Adding hostname and subdomain (must be set to the <service-name>) in Pod definition also creates separate dns record for each pod, regardless of using a headless service or not.
 
 ---
 Helpful 'kubectl' commands:
