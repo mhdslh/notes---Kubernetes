@@ -39,7 +39,7 @@ Liveness probes can be used to detect when to restart a container. For example, 
 
 17- Remember namespaces provide a mechanism for isolating groups of resources within a single cluster. For instance, a service directs traffic to the Pods that match its selector within the same namespace. Pods in namespace 'my-ns' can call the service 'my-svc' in that namespace by using its name,i.e., 'my-svc'. However, Pods in other namespaces must call this service 'my-svc.my-ns'. This is how DNS records can be used to contact services ([reference](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/ for more information).
 
-18- Ingress controller and Network Plugin must be configured for minikube and kind cluster to be able to use ingress resources and network policies.
+18- Ingress controller and Network Plugin must be configured for minikube and kind cluster to be able to use ingress resources and network policies. (Network Policy controls traffic flow between Pods)
 
 19- In a deployment with multiple containers, if a container crashes, Kubelete restarts the crashed container, not the entire Pod.
 
@@ -62,6 +62,8 @@ PersistentVolume (PV) captures the details of the implementation of the storage 
 
 22- For a clusterIP service, dnslookup for <service-name> returns IP address of the clusterIP. On the other hand, for a headless service,  dnslookup for <service-name> returns IP addresses of the backing Pods. 
 Adding hostname and subdomain (must be set to the <service-name>) in Pod definition also creates separate dns record for each pod, regardless of using a headless service or not.
+
+23- By default, kubectl looks for a file named config in the $HOME/.kube directory. You can specify other kubeconfig files by setting the KUBECONFIG environment variable or by setting the "--kubeconfig" flag in kubectl command. kubeconfig file contains clusters (".clusters"), contexts (".contexts"), and users (".users") sections. Each context has three parameters: cluster, namespace, and user. Contexts allow quick and easy switch between clusters and namespaces. By default, the kubectl command-line tool uses parameters from the current context to communicate with the cluster. "kubectl config ..." can modify kubeconfig file. For more information check its help. 
 
 ---
 Helpful 'kubectl' commands:
