@@ -90,4 +90,7 @@ To do:
 - After creating a container with kind, inside the container we have containerd client command line tool (ctl) and docker client is not provided. What is containerd?
 - kubectl port-forward
 - ClusterRole for non-resource endpoints (like /healthz)
+- Core dump
+- Core dns
+- Networking (multi node kubernetes cluster)
 
