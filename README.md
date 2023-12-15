@@ -67,10 +67,10 @@ Adding hostname and subdomain (must be set to the <service-name>) in Pod definit
 
 24- RBAC Authorization: to use RBAC to make authorization decisions, API server must be started when the --authorization-mode flag includes RBAC. Kubernetes api server also supports Node Authorization (for kubelet), ABAC, Webhook (through 3pp applications), always allow, and always deny modes. Role or ClusterRole contains rules that represent a set of permissions. A Role always sets permissions within a particular namespace; therefore, when creating a Role, the namespace it belongs to must be specified in the metadata section. ClusterRole, by contrast, is a non-namespaced resource. We can use ClusterRoles to define permissions on cluster-scoped resources (like nodes), non-resource endpoints (like /healthz),  or even namespaced resources within an individual namespace (with RoleBinding) or across all namespaces (with ClusterRoleBinding). A RoleBinding grants permissions within a specific namespace whereas a ClusterRoleBinding grants that access cluster-wide. **A RoleBinding may reference any Role in the same namespace. Alternatively, a RoleBinding can reference a ClusterRole and bind that ClusterRole to the namespace of the RoleBinding. To bind a ClusterRole to all the namespaces in the cluster, we must use a ClusterRoleBinding.** 
 
-Notes on .rules.apiGroups and .rules.resources when setting permissions by Roles/ClusterRoles:
-- ApiGroup, ApiVersion, and REST path: For core apiGroup, REST path is typically "/api/v1" and apiVersion is "v1". For named apiGroups, REST path is "/apis/$API_GROUP/$VERSION" and apiVersion is "$API_GROUP/$VERSION".
-- resources are plural (e.g., "deployments")
-- If .rules.apiGroups and .rules.resources are set incorrectly, error returned by kubernetes hints the correct form.
+When setting permissions by Roles/ClusterRoles, for each rule apiGroups and resources must be specified:
+- apiGroup, apiVersion, and REST path: For core apiGroup, REST path is typically "/api/v1" and apiVersion is "v1". For named apiGroups, REST path is "/apis/apiGroup/version" and apiVersion is "apiGroup/version".
+- To the best of my knowledge, resources are plural (e.g., "deployments")
+- If .rules.apiGroups and .rules.resources are set incorrectly, error returned by kubernetes hints at the correct format.
 
 ![image](https://github.com/mhdslh/notes---Kubernetes/assets/61638154/f4dac963-b341-42e5-9fbf-2797c3a23930)
 
