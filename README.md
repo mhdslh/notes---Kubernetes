@@ -74,6 +74,7 @@ When setting permissions by Roles/ClusterRoles, each rule contains apiGroups, re
 
 ![image](https://github.com/mhdslh/notes---Kubernetes/assets/61638154/f4dac963-b341-42e5-9fbf-2797c3a23930)
 
+25- CRD
 
 ---
 Helpful 'kubectl' commands:
