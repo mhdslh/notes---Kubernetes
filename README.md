@@ -60,8 +60,8 @@ PersistentVolume (PV) captures the details of the implementation of the storage 
 
 21- Stateful set
 
-22- For a clusterIP service, dnslookup for <service-name> returns IP address of the clusterIP. On the other hand, for a headless service,  dnslookup for <service-name> returns IP addresses of the backing Pods. 
-Adding hostname and subdomain (must be set to the <service-name>) in Pod definition also creates separate dns record for each pod, regardless of using a headless service or not.
+22- For a clusterIP service, dnslookup for *service-name* returns IP address of the clusterIP. On the other hand, for a headless service,  dnslookup for *service-name* returns IP addresses of the backing Pods. 
+Adding hostname and subdomain (must be set to the *service-name*) in Pod definition also creates separate dns record for each pod, regardless of using a headless service or not.
 
 23- Authetication: By default, kubectl looks for a file named config in the $HOME/.kube directory. Other kubeconfig files can be specified by setting the KUBECONFIG environment variable or by setting the "--kubeconfig" flag in kubectl command. kubeconfig file contains clusters (".clusters"), contexts (".contexts"), and users (".users") sections. Each context has three parameters: cluster, namespace, and user. Contexts allow quick and easy switch between clusters. By default, the kubectl uses parameters from the current context to communicate with the cluster. "kubectl config ..." can modify kubeconfig file. For more information check its help. 
 
