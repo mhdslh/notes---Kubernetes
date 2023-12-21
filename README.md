@@ -82,8 +82,9 @@ Custom resources can be combined with custom controllers. Custom controller is a
  
 ---
 Helpful 'kubectl' commands:
-- kubectl explain <resource-type>: to find out about api version for a resource type.
+- kubectl explain <resource-type>: to find out about api group, version, and each field in its manifest. For example `kubectl explain customresourcedefinitions.spec.versions.served` explains .spec.versions.served field of customresourcedefinitions.
 - kubectl top <node or pod>: to see the resource consumption for nodes or pods.
+
 
 ---
 Links:
