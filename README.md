@@ -74,7 +74,10 @@ When setting permissions by Roles/ClusterRoles, each rule contains apiGroups, re
 
 ![image](https://github.com/mhdslh/notes---Kubernetes/assets/61638154/f4dac963-b341-42e5-9fbf-2797c3a23930)
 
-25- Custom resources are extensions of the Kubernetes API that allow you to create your own resources, beyond the built-in set provided by Kubernetes. A Custom Resource (CR) allows you to define your own API objects with their own specifications and APIs. To add custom resources, two ways are provided by Kubernetes. 1- Custom Resource Definition which (CRD) describes the name, validation, and schema of the new resource 2- Aggregate APIs which extend Kubernetes API (they are subordinate API servers that sit behind the primary API server, and the main API server delegates requests to them). Former is simpler to use, while later provides more flexibility. Custom resources can be combined with custom controller. Custom controller is a process that watches the state of eKubernetes cluster through the Kubernetes API and makes changes attempting to move the current state of (custom) resources towards the desired state (i.e., enables declarative API).
+25- Custom resources are extensions of the Kubernetes API that allow you to create your own resources, beyond the built-in set provided by Kubernetes. A Custom Resource (CR) allows you to define your own API objects with their own specifications and APIs. To add custom resources, two ways are provided by Kubernetes. 
+  1- Custom Resource Definition which (CRD) describes the name, validation, and schema of the new resource. (simpler to use)
+  2- Aggregate APIs which extend Kubernetes API. In other words, aggregate APIs are subordinate API servers that sit behind the primary API server, and the main API server delegates requests to them. (provides more flexibility)
+Custom resources can be combined with custom controllers. Custom controller is a process that watches the state of our cluster through the Kubernetes API and makes changes attempting to move the current state of the (custom) resource towards the desired state (i.e., enables declarative API).
  
 ---
 Helpful 'kubectl' commands:
