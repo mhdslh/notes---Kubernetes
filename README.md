@@ -58,14 +58,12 @@ PersistentVolume (PV) captures the details of the implementation of the storage 
   - using: Pods use claims as volumes (described earlier). **Claims must exist in the same namespace as the Pod using the claim.**
 ![image](https://github.com/mhdslh/notes---Kubernetes/assets/61638154/e9bb7dfd-12c9-4663-879b-5fc8692e4ba8)
 
-21- Stateful set
-
-22- For a clusterIP service, dnslookup for *service-name* returns IP address of the clusterIP. On the other hand, for a headless service,  dnslookup for *service-name* returns IP addresses of the backing Pods. 
+21- For a clusterIP service, dnslookup for *service-name* returns IP address of the clusterIP. On the other hand, for a headless service,  dnslookup for *service-name* returns IP addresses of the backing Pods. 
 Adding hostname and subdomain (must be set to the *service-name*) in Pod definition also creates separate dns record for each pod, regardless of using a headless service or not.
 
-23- Authetication: By default, kubectl looks for a file named config in the $HOME/.kube directory. Other kubeconfig files can be specified by setting the KUBECONFIG environment variable or by setting the "--kubeconfig" flag in kubectl command. kubeconfig file contains clusters (".clusters"), contexts (".contexts"), and users (".users") sections. Each context has three parameters: cluster, namespace, and user. Contexts allow quick and easy switch between clusters. By default, the kubectl uses parameters from the current context to communicate with the cluster. "kubectl config ..." can modify kubeconfig file. For more information check its help. 
+22- Authetication: By default, kubectl looks for a file named config in the $HOME/.kube directory. Other kubeconfig files can be specified by setting the KUBECONFIG environment variable or by setting the "--kubeconfig" flag in kubectl command. kubeconfig file contains clusters (".clusters"), contexts (".contexts"), and users (".users") sections. Each context has three parameters: cluster, namespace, and user. Contexts allow quick and easy switch between clusters. By default, the kubectl uses parameters from the current context to communicate with the cluster. "kubectl config ..." can modify kubeconfig file. For more information check its help. 
 
-24- RBAC Authorization: to use RBAC to make authorization decisions, API server must be started when the --authorization-mode flag includes RBAC. Kubernetes api server also supports Node Authorization (for kubelet), ABAC, Webhook (through 3pp applications), always allow, and always deny modes. Role or ClusterRole contains rules that represent a set of permissions. A Role always sets permissions within a particular namespace; therefore, when creating a Role, the namespace it belongs to must be specified in the metadata section. ClusterRole, by contrast, is a non-namespaced resource. We can use ClusterRoles to define permissions on cluster-scoped resources (like nodes), non-resource endpoints (like /healthz),  or even namespaced resources within an individual namespace (with RoleBinding) or across all namespaces (with ClusterRoleBinding). A RoleBinding grants permissions within a specific namespace whereas a ClusterRoleBinding grants that access cluster-wide. **A RoleBinding may reference any Role in the same namespace. Alternatively, a RoleBinding can reference a ClusterRole and bind that ClusterRole to the namespace of the RoleBinding. To bind a ClusterRole to all the namespaces in the cluster, we must use a ClusterRoleBinding.** 
+23- RBAC Authorization: to use RBAC to make authorization decisions, API server must be started when the --authorization-mode flag includes RBAC. Kubernetes api server also supports Node Authorization (for kubelet), ABAC, Webhook (through 3pp applications), always allow, and always deny modes. Role or ClusterRole contains rules that represent a set of permissions. A Role always sets permissions within a particular namespace; therefore, when creating a Role, the namespace it belongs to must be specified in the metadata section. ClusterRole, by contrast, is a non-namespaced resource. We can use ClusterRoles to define permissions on cluster-scoped resources (like nodes), non-resource endpoints (like /healthz),  or even namespaced resources within an individual namespace (with RoleBinding) or across all namespaces (with ClusterRoleBinding). A RoleBinding grants permissions within a specific namespace whereas a ClusterRoleBinding grants that access cluster-wide. **A RoleBinding may reference any Role in the same namespace. Alternatively, a RoleBinding can reference a ClusterRole and bind that ClusterRole to the namespace of the RoleBinding. To bind a ClusterRole to all the namespaces in the cluster, we must use a ClusterRoleBinding.** 
 
 When setting permissions by Roles/ClusterRoles, each rule contains apiGroups, resources, and verbs.
 - apiGroup, apiVersion, and REST path: For core apiGroup (""), REST path is typically "/api/v1" and apiVersion is "v1". For named apiGroups (e.g., apps, networking.k8s.io, etc.), REST path is "/apis/*apiGroup*/*version*" and apiVersion is "*apiGroup*/*version*".
@@ -74,7 +72,7 @@ When setting permissions by Roles/ClusterRoles, each rule contains apiGroups, re
 
 ![image](https://github.com/mhdslh/notes---Kubernetes/assets/61638154/f4dac963-b341-42e5-9fbf-2797c3a23930)
 
-25- Custom resources are extensions of the Kubernetes API that allow you to create your own resources, beyond the built-in set provided by Kubernetes. A Custom Resource (CR) allows you to define your own API objects with their own specifications and APIs. To add custom resources, two ways are provided by Kubernetes. 
+24- Custom resources are extensions of the Kubernetes API that allow you to create your own resources, beyond the built-in set provided by Kubernetes. A Custom Resource (CR) allows you to define your own API objects with their own specifications and APIs. To add custom resources, two ways are provided by Kubernetes. 
 1) **Custom Resource Definition (CRD)** which describes the name, validation, and schema of the new resource. (simpler to use)
 2) **Aggregate APIs** which extend Kubernetes API. In other words, aggregate APIs are subordinate API servers that sit behind the primary API server, and the main API server delegates requests to them. (provides more flexibility)
 
@@ -90,12 +88,4 @@ Helpful 'kubectl' commands:
 Links:
 - [Kubernetes-Sigs](https://github.com/kubernetes-sigs)
 
----
-To do:
-- https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/
-- After creating a container with kind, inside the container we have containerd client command line tool (ctl) and docker client is not provided. What is containerd?
-- ClusterRole for non-resource endpoints (like /healthz)
-- Core dump
-- Core dns
-- Networking (multi node kubernetes cluster)
 
