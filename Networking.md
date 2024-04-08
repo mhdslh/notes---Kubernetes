@@ -18,10 +18,16 @@ https://www.youtube.com/watch?v=kA0C44nTwjU
 ![image](https://github.com/mhdslh/notes---Kubernetes/assets/61638154/5859cb96-9af6-4294-9f0a-06738b0e5b8e)
 
 
-**Appemdix B: Life of a Packet**
+**Appendix B: Life of a Packet**
 ![image](https://github.com/mhdslh/notes---Kubernetes/assets/61638154/6f4e3323-67e9-4157-8a11-d610d0fb75cc)
 - Remark1: Source and Destination MAC addresses of a packet are updated hop by hop. The source and destination IP addresses always remain unchanged end to end.
 
 - Remark2: DNS resolves FQDN (fully qualified domain names) to IP addresses. DNS cache is a local storage of DNS records (stores IP addresses of previously visited FQDNs). ARP cache entries are created when an IP address is resolved to a MAC address.
 
 - Remark 3: If the destination IP address is not within the local subnet, the packet will be forwarded to its default gateway by setting the destination MAC address to the default gateway's MAC address. 
+
+**Appendix C: Routing**
+
+- Remark1: The gateway of last resort is the network point that a router uses to forward packets when it doesn't have specific instructions about a destination address in its routing table. Essentially, it's the "fallback" route or last-resort route. (Default Gateway is commonly used in the context of host and client configurations. It's the "way out" of the local network.)
+
+- Remark2: If the routing table contains multiple entries that match the destination IP, the router uses the longest prefix match rule. This means that the router selects the entry that has the most number of leading bits in common with the destination IP address (i.e., most specific route).  When a router has multiple routesh, it can distribute the data packets among these routes to balance the load and maximize throughput, minimize response time and avoid overload of any single path.
