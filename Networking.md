@@ -28,7 +28,7 @@ https://www.youtube.com/watch?v=kA0C44nTwjU
 
 **Appendix C: Routing**
 
-- Remark1: Each entry in the routing table typically includes information about the destination network, the next hop or outgoing interface to use for reaching that destination, and sometimes additional parameters such as the cost or metric associated with each route. Next hop is always directly reachable by a connected interface.
+- Remark1: Each entry in the routing table typically includes information about the destination network, the next hop or outgoing interface to use for reaching that destination, and sometimes additional parameters such as the cost or metric associated with each route. Next hop is always directly reachable by a connected interface. The routing table is updated dynamically through routing protocols (dynamic routes) or manually configured by network administrators to ensure efficient and reliable routing of network traffic (static routes).
 
 - Remark2: The gateway of last resort is the network point that a router uses to forward packets when it doesn't have specific instructions about a destination address in its routing table. Essentially, it's the "fallback" route or last-resort route. (Do not confuse it with default gateway. Default Gateway is commonly used in the context of host and client configurations. It's the "way out" of the local network.)
 
