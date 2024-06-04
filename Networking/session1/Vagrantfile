@@ -1,0 +1,25 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+$script = <<SCRIPT
+echo "sudo apt-get -y update" >> /home/vagrant/.bashrc
+echo "sudo apt-get -y upgrade" >> /home/vagrant/.bashrc
+# echo "sudo apt-get -y traceroute" >> /home/vagrant/.bashrc
+# echo "sudo apt-get -y tshark" >> /home/vagrant/.bashrc
+echo "cd /vagrant" >> /home/vagrant/.bashrc
+SCRIPT
+
+Vagrant.configure(2) do |config|
+  config.vm.define "node1" do |s1|
+      s1.vm.box = "ubuntu/xenial64"
+      s1.vm.network :private_network, ip: "10.0.0.11", virtualbox__intnet: "demo-network"
+      s1.vm.hostname = "node1"
+      s1.vm.provision "shell", inline: $script
+  end
+  config.vm.define "node2" do |s2|
+      s2.vm.box = "ubuntu/xenial64"
+      s2.vm.network :private_network, ip: "10.0.0.12", virtualbox__intnet: "demo-network"
+      s2.vm.hostname = "node2"
+      s2.vm.provision "shell", inline: $script
+  end
+end
