@@ -6,9 +6,9 @@
 
 4- [Cloud Networking](https://www.coursera.org/learn/cloud-networking)
 
-To Do:
-vlan => vxlan
-iptables
+To Do:\
+vlan => vxlan\
+iptables\
 bgp, netfilter subsystem, socket programming, loopback vs physical interface
 
 **Appendix A**:
