@@ -6,6 +6,11 @@
 
 4- [Cloud Networking](https://www.coursera.org/learn/cloud-networking)
 
+To Do:
+vlan => vxlan
+iptables
+bgp, netfilter subsystem, socket programming, loopback vs physical interface
+
 **Appendix A**:
 ![image](https://github.com/mhdslh/notes---Kubernetes/assets/61638154/5859cb96-9af6-4294-9f0a-06738b0e5b8e)
 
