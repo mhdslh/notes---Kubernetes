@@ -8,7 +8,7 @@
 
 To Do:\
 vlan => vxlan\
-iptables\
+iptables (nat)\
 bgp, netfilter subsystem, socket programming, loopback vs physical interface
 
 **Appendix A**:
