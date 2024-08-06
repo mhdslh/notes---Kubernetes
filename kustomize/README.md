@@ -1,6 +1,6 @@
 ![image](https://github.com/user-attachments/assets/c1647fb0-c4dd-4818-a6e6-956d7f103a8a)
 
--  [Built-in generators and transformers](https://kubectl.docs.kubernetes.io/references/kustomize/builtins/#usage-via-kustomizationyaml-8)
+-  [Built-in generators and transformers](https://kubectl.docs.kubernetes.io/references/kustomize/builtins/)
 
 -  A fieldSpec list, in a transformer's configuration, determines which resource types and which fields within those types the transformer can modify.
 ```
