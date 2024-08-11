@@ -1,4 +1,4 @@
-IMG ?= webhook-server:0.1.0
+IMG ?= webhook-server:1.0.0
 
 CONTAINER_TOOL ?= docker
 
@@ -18,23 +18,24 @@ push: image
 deploy: image
 	kind create cluster --name demo
 	kind load docker-image $(IMG) --name demo
-	kubectl apply -f resources/webhook-namespace.yaml
-	kubectl apply -f resources/webhook-server.yaml
+	cd k8s/webhook-server && kustomize edit set image webhook-server=$(IMG) 
+	kustomize build k8s/webhook-server | kubectl apply -f -
 	scripts/deployment_status_monitor.sh webhook-server --ns admission-webhook
-	kubectl apply -f resources/webhook-configuration.yaml
+	kubectl apply -k k8s/webhook-configuration
 
 .PHONY: test
 test:
-	kubectl apply -f resources/test-pod.yaml
+	kubectl apply -f k8s/test
 
 .PHONY: uplift
 uplift: image
 	kind load docker-image $(IMG) --name demo
-	kubectl delete -f resources/webhook-configuration.yaml
-	kubectl delete -f resources/webhook-server.yaml
-	kubectl apply -f resources/webhook-server.yaml
+	kubectl delete -f k8s/webhook-configuration/webhook-configuration.yaml
+	kubectl delete -k k8s/webhook-server
+	cd k8s/webhook-server && kustomize edit set image webhook-server=$(IMG) 
+	kustomize build k8s/webhook-server | kubectl apply -f -
 	scripts/deployment_status_monitor.sh webhook-server --ns admission-webhook
-	kubectl apply -f resources/webhook-configuration.yaml
+	kubectl apply -k k8s/webhook-configuration
 
 .PHONY: clean
 clean:

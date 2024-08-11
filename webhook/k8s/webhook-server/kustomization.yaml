@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: admission-webhook
+
+components:
+- ../components/cert
+
+patches:
+- patch: "- op: add\n  path: /spec/template/spec/volumes\n  value:\n    - name: cert\n
+    \     configMap: \n        name: cert\n- op: add\n  path: /spec/template/spec/containers/0/volumeMounts\n
+    \ value:\n    - name: cert\n      mountPath: \"/home\""
+  target:
+    kind: Deployment
+    name: webhook-server
+
+resources:
+- webhook-namespace.yaml
+- webhook-server.yaml
+images:
+- name: webhook-server
+  newName: webhook-server
+  newTag: 1.0.0
