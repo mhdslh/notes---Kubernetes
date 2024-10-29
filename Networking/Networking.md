@@ -2,7 +2,8 @@
 
 2- [Tutorial: Communication Is Key - Understanding Kubernetes Networking - Jeff Poole, Vivint Smart Home](https://www.youtube.com/watch?v=InZVNuKY5GY)
 
-3- [Kubernetes Networking Series](https://www.youtube.com/playlist?list=PLSAko72nKb8QWsfPpBlsw-kOdMBD7sra-)
+3a- Operating system: [Lecturs](https://www.youtube.com/watch?v=QEZKgWqwMeA&list=PLzBbfbHQmjyuqBFJ8KpDdcvnLNkvPXbS-) + [Homepage](https://pages.cs.wisc.edu/~remzi/Classes/537/Fall2013/)
+3b- [Kubernetes Networking Series](https://www.youtube.com/playlist?list=PLSAko72nKb8QWsfPpBlsw-kOdMBD7sra-)
 
 4- [Cloud Networking](https://www.coursera.org/learn/cloud-networking)
 
